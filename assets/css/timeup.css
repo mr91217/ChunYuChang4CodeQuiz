@@ -11,3 +11,9 @@
     border-radius: 10%;
     color: white;
 }
+
+#cc {
+    position: absolute;
+    top: 20vw;
+    left: 43vw;
+}

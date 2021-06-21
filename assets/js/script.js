@@ -20,7 +20,7 @@ var counter;
 startBtn.addEventListener("click",function(e){
     e.preventDefault();
     beginGame();
-    countdown();
+    // countdown_init();
 });
 
 function beginGame() {
@@ -36,6 +36,7 @@ function beginGame() {
     counter = 0;
     correctAnswers = 0;
     displayQuestion();
+    
     
     
 }
@@ -148,29 +149,24 @@ function highScore() {
         console.log(user_score_list);
         localStorage.setItem("datakey", JSON.stringify(user_score_list));
         var h3 = document.createElement(h3);
-        var h4 = document.createElement(h4);
-        var h5 = document.createElement(h5);
 
         h3.textContent = user_score_list[0] + " --- " + user_score_list[1];
-        h4.textContent = user_score_list[2] + " --- " + user_score_list[3];
-        h5.textContent = user_score_list[4] + " --- " + user_score_list[5];
         scoreName.appendChild(h3);
-        scoreName.appendChild(h4);
-        scoreName.appendChild(h5);
+        
 
-        return false;
     }
 
   playAgainBtn.addEventListener("click", function(e){
       e.preventDefault();
+      countdown_init();
       beginGame();
-      countdown();
+      
   });
 
   submitBtn.addEventListener("click", function(e){
       e.preventDefault();
       highScore();
-      guardarNumeros();
+      
   });
 
   CB.addEventListener("click", function(e){
@@ -180,29 +176,31 @@ function highScore() {
 
 /*************************************************************/
 
-
-var timerEl = document.getElementById('timer');
-function countdown() {
-    var timeLeft = 3;
-
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timeInterval = setInterval(function() {
-        // As long as the `timeLeft` is greater than 1
-        if (timeLeft > 1) {
-        // Set the `textContent` of `timerEl` to show the remaining seconds
-        timerEl.textContent = "Time: " + timeLeft;
-        // Decrement `timeLeft` by 1
-        timeLeft--;
-        } else if (timeLeft === 1) {
-        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-        timerEl.textContent = "Time: " + timeLeft;
-        timeLeft--;
-        } else {
-        
-        window.location.href = "timeup.html";
-        
+    var countdown;
+    var countdown_number;
+   
+    function countdown_init() {
+        countdown_number = 31;
+        countdown_trigger();
+    }
+   
+    function countdown_trigger() {
+        if (countdown_number > 0) {
+            countdown_number--;
+   
+            document.getElementById('countdown_text').innerHTML = "Time: " + countdown_number;
+   
+            if(countdown_number > 0) {
+                countdown = setTimeout('countdown_trigger()', 1000);
+            }else{
+                window.location.href = "timeup.html";
+            }
         }
-    }, 1000);
+    }
+
+
+function hidetimer() {
+    clearTimeout(countdown);   
     }
 
 /*************************************************************/
