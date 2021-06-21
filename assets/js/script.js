@@ -20,7 +20,7 @@ var counter;
 startBtn.addEventListener("click",function(e){
     e.preventDefault();
     beginGame();
-    // countdown();
+    countdown();
 });
 
 function beginGame() {
@@ -164,6 +164,7 @@ function highScore() {
   playAgainBtn.addEventListener("click", function(e){
       e.preventDefault();
       beginGame();
+      countdown();
   });
 
   submitBtn.addEventListener("click", function(e){
@@ -179,9 +180,10 @@ function highScore() {
 
 /*************************************************************/
 
+
 var timerEl = document.getElementById('timer');
 function countdown() {
-    var timeLeft = 60;
+    var timeLeft = 3;
 
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function() {
@@ -196,9 +198,8 @@ function countdown() {
         timerEl.textContent = "Time: " + timeLeft;
         timeLeft--;
         } else {
-        // alert("Time is up");
-        showStats();
-        othername();        
+        
+        window.location.href = "timeup.html";
         
         }
     }, 1000);
